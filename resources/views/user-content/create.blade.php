@@ -1,0 +1,131 @@
+@extends('layout')
+
+@section('content')
+    <div class="main main-expanded">
+        <div class="row m-bot flex">
+            <div class="col-md-3">
+                <a href="{{ route('user-content.index') }}" class="text-nav-title">SMC Research Journal Online Repository</a>
+            </div>
+
+            <div class="col-md-9">
+                <p class="text-nav-title">
+                    <a href="{{ route('user-content.profile') }}" style="font-weight: nomal">
+                        <i class="bi bi-caret-left-fill" style="margin-right: 0.25rem"></i>{{ Auth::user()->name }}
+                    </a>
+                    / Upload Journal
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            {{-- User info & upload journal link --}}
+            <div class="col-md-3">
+                <ul>
+                    <li>
+                        <p class="text-nav-title">{{ Auth::user()->name }}</p>
+                        <p class="m-bot">{{ Auth::user()->email }}</p>
+                    </li>
+
+                    <li>
+                        <p>Joined on:</p>
+                        <span>{{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('F d, Y') }}</span>
+                    </li>
+
+                    <li style="margin-top: auto">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi bi-door-closed-fill" style="margin-left: 0.5rem"></i>
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Upload journal form --}}
+            <div class="col-md-9">
+                {{-- Error Messages goes here --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('user-content.upload') }}" method="POST" enctype="multipart/form-data">
+                    @method('post')
+
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-input-group">
+                                <label for="">Journal Title</label>
+                                <input type="text" name="title" id="title" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-group">
+                                <label for="">Journal Author</label>
+                                <input type="text" name="author" id="author" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-input-group">
+                                <label for="">Publisher</label>
+                                <input type="text" name="publisher" id="publisher" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input-group">
+                                <label for="">Date Published</label>
+                                <input type="date" name="datePublished" id="datePublished" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-input-group">
+                                <label>Abstract</label>
+                                <textarea name="abstract" class="m-bot" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="journalFile" class="form-label">Journal File</label>
+                            <input class="form-control" type="file" name="journalFile" id="journalFile"
+                                style="box-shadow: none" required>
+                        </div>
+                        <div class="col-md-6 flex flex-gap-1">
+                            <div class="right-pos-m">
+                                <label for=""></label>
+                                <button type="submit" class="link-btn" name="submit">
+                                    <i class="bi bi-cloud-arrow-up-fill" style="margin-right: 0.5rem"></i>
+                                    Upload Journal
+                                </button>
+                            </div>
+                            <div>
+                                <label for=""></label>
+                                <a href="{{ route('user-content.profile') }}" class="link-cancel"><i class="bi bi-x-lg"
+                                        style="margin-right: 0.5rem"></i>Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- SCRIPTS --}}
+@endsection
