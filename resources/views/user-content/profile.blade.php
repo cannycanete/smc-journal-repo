@@ -47,10 +47,14 @@
 
             {{-- User uploaded journals --}}
             <div class="col-md-9">
-                {{-- Alert Message for creating adjustments --}}
+                {{-- Alert Message for uploading journal --}}
                 @if (session('success'))
                     <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Adjusment(s) Created</span>
+                        <span>Success! Journal Uploaded</span>
+                    </div>
+                @elseif (session('success-delete'))
+                    <div class="custom-alert delete m-bot" role="alert">
+                        <span>Success! Journal Deleted</span>
                     </div>
                 @endif
 
@@ -71,7 +75,23 @@
                         @else
                             @foreach ($journals as $journal)
                                 <div class="journal-card">
-                                    <a class="text-journal-title text-bold">{{ $journal->title }}</a>
+                                    <div class="relative">
+                                        <a class="text-journal-title text-bold"
+                                            href="{{ route('user-content.journal', ['id' => $journal->id]) }}">{{ $journal->title }}</a>
+                                        <!-- Delete button -->
+                                        <div class="right-pos-absolute">
+                                            <form action="{{ route('user-content.delete', ['id' => $journal->id]) }}"
+                                                method="POST" class="pos-right-m">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="link-delete" title="Delete Journal"
+                                                    onclick="return confirm('Are you sure you want to delete this journal?')">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                    </div>
                                     <span class="text-journal-basic-info">
                                         {{ $journal->author . ' - ' . $journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}
                                     </span>
