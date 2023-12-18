@@ -106,6 +106,12 @@ p {
     margin-left: auto;
 }
 
+.right-pos-absolute {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 /* POSITIONS & DISPLAY */
 .flex {
     display: flex;
@@ -114,6 +120,10 @@ p {
 
 .flex-gap-1 {
     gap: 1rem;
+}
+
+.relative {
+    position: relative;
 }
 
 ul {
@@ -167,12 +177,24 @@ ul li {
 }
 
 button {
+    background-color: transparent;
     border: none;
 }
 
 .search-input-group button i {
     color: var(--accent-color);
 }
+
+.link-delete i{
+    display: block;
+    font-size: 1rem;
+    transition: transform 0.5s;
+}
+
+.link-delete i:hover {
+    color: var(--negative-color);
+    transform: rotate(90deg);
+} 
 
 /* DIV */
 .wrapper {

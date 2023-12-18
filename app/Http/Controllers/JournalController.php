@@ -79,8 +79,21 @@ class JournalController extends Controller
         ]);
     }
 
-    public function journal($id) {
+    public function journal($id)
+    {
         $journal = Journal::findOrFail($id);
         return view('user-content.journal', ['journal' => $journal]);
+    }
+
+    public function destroy($id)
+    {
+        $journal = Journal::find($id);
+        if (!$journal) {
+            return redirect()->back()->with('error', 'Journal not found');
+        }
+
+        $journal->delete();
+
+        return redirect()->back()->with('success-delete', 'Journal deleted successfully');
     }
 }
