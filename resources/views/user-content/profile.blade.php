@@ -5,7 +5,10 @@
 
         <div class="row m-bot flex">
             <div class="col-md-3">
-                <a href="{{ route('user-content.index') }}" class="text-nav-title">SMC Research Journal Online Repository</a>
+                <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
+                    <p class="nav-main-text">SMC</p>
+                    <p class="nav-sub-text">Research Journal Online Repository</p>
+                </a>
             </div>
 
             <div class="col-md-9 flex">
