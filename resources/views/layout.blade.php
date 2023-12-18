@@ -39,6 +39,7 @@
         </form> --}}
         <main>
             @yield('content')
+            <p class="text-footer">&#169; 2023 SMC Research Journal Online Repository</p>
         </main>
     </div>
 
