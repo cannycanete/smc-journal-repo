@@ -82,10 +82,12 @@
                     <p class="m-bot">{{ $journal->abstract }}</p>
                     {{-- Download file --}}
                     <div class="flex gap-1">
-                        <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download">
+                        <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
                             <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                             Download File
                         </a>
+                        <span style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }} Downloads</span>
+                        <span>{{ $journal->journalViewCounter }} Views</span>
                         {{-- <span># Downloads</span>
                         <span># Views</span> --}}
                     </div>

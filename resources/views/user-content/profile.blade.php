@@ -100,7 +100,7 @@
                                     </span>
                                     <p class="text-cutoff">{{ $journal->abstract }}</p>
                                     {{-- Download file --}}
-                                    <a href="{{ route('download-journal', ['id' => $journal->id]) }}" class="link-download">
+                                    <a href="{{ route('download-journal', ['id' => $journal->id]), asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download">
                                         <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                                         Download File
                                     </a>

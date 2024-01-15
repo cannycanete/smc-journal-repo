@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Journal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class JournalController extends Controller
 {
@@ -53,6 +54,7 @@ class JournalController extends Controller
             $journal->filePath = $destinationPath . '/' . $fileName;
             $journal->fileName = $fileName;
             $journal->journalDownloadCounter = 0;
+            $journal->journalViewCounter = 0;
 
             $journal->save();
             // dd($request->user_id);
@@ -83,6 +85,11 @@ class JournalController extends Controller
     public function journal($id)
     {
         $journal = Journal::findOrFail($id);
+        
+        // Increment view counter
+        $journal->journalViewCounter += 1;
+        $journal->save();
+
         return view('user-content.journal', ['journal' => $journal]);
     }
 
@@ -108,6 +115,7 @@ class JournalController extends Controller
         $path = public_path($journal->filePath);
         $fileName = $journal->fileName;
 
-        return response()->download($path, $fileName);
+        // return response()->download($path, $fileName);
+        return redirect()->back()->with('success', 'Adjustment(s) created successfully!');
     }
 }

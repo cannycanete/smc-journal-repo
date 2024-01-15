@@ -90,10 +90,12 @@
                                     <p class="text-cutoff">{{ $journal->abstract }}</p>
                                     {{-- Download file --}}
                                     <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
-                                        class="link-download">
+                                        class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
                                         <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                                         Download File
                                     </a>
+                                    <span style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }} Downloads</span>
+                                    <span>{{ $journal->journalViewCounter }} Views</span>
                                 </div>
                             @endforeach
                         @endif
