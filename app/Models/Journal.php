@@ -19,6 +19,7 @@ class Journal extends Model
         'publisher',
         'fileName',
         'journalDownloadCounter',
+        'journalViewCounter',
     ];
 
     // Define the relationship with the User model

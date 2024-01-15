@@ -97,12 +97,13 @@
                                 <div class="flex gap-1">
                                     {{-- Download file --}}
                                     <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
-                                        class="link-download">
+                                        class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
                                         <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                                         Download File
                                     </a>
 
-                                    <span>{{ $journal->journalDownloadCounter }} Downloads</span>
+                                    <span style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }} Downloads</span>
+                                    <span>{{ $journal->journalViewCounter }} Views</span>
                                 </div>
                                 
                             </div>

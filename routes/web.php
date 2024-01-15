@@ -32,7 +32,7 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::post('user-content/search/', [JournalController::class, 'search'])->name('user-content.search');
     Route::get('user-content/journal/{id}', [JournalController::class, 'journal'])->name('user-content.journal');
     Route::delete('user-content/journal/{id}', [JournalController::class, 'destroy'])->name('user-content.delete');
-    Route::get('download-journal/{id}', [JournalController::class, 'download'])->name('download-journal');
+    Route::get('user-content/download-journal/{id}', [JournalController::class, 'download'])->name('download-journal');
 
 });
 
