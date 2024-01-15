@@ -5,7 +5,7 @@
         <div class="row m-bot flex">
             <div class="col-md-3">
                 <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
-                    <p class="nav-main-text">SMC</p>
+                    <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
                     <p class="nav-sub-text">Research Journal Online Repository</p>
                 </a>
             </div>

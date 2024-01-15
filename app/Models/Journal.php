@@ -18,6 +18,7 @@ class Journal extends Model
         'user_id', // Assuming user_id is fillable
         'publisher',
         'fileName',
+        'journalDownloadCounter',
     ];
 
     // Define the relationship with the User model

@@ -52,6 +52,7 @@ class JournalController extends Controller
             $journalFile->move($destinationPath, $fileName);
             $journal->filePath = $destinationPath . '/' . $fileName;
             $journal->fileName = $fileName;
+            $journal->journalDownloadCounter = 0;
 
             $journal->save();
             // dd($request->user_id);
@@ -95,5 +96,18 @@ class JournalController extends Controller
         $journal->delete();
 
         return redirect()->back()->with('success-delete', 'Journal deleted successfully');
+    }
+
+    public function download($id)
+    {
+        $journal = Journal::findOrFail($id);
+        $journal->journalDownloadCounter = $journal->journalDownloadCounter + 1;
+        $journal->save();
+
+        // Download the file
+        $path = public_path($journal->filePath);
+        $fileName = $journal->fileName;
+
+        return response()->download($path, $fileName);
     }
 }

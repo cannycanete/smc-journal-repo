@@ -5,7 +5,8 @@
         <div class="row m-bot flex">
             <div class="col-md-3">
                 <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
-                    <p class="nav-main-text">SMC</p>
+                    {{-- <p class="nav-main-text">SMC</p> --}}
+                    <img src="img/mysmc.png" alt="mysmclogo" class="img-nav-logo">
                     <p class="nav-sub-text">Research Journal Online Repository</p>
                 </a>
             </div>
@@ -75,8 +76,7 @@
                                 </span>
                                 <p class="text-cutoff">{{ $journal->abstract }}</p>
                                 {{-- Download file --}}
-                                <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
-                                    class="link-download">
+                                <a href="{{ route('download-journal', ['id' => $journal->id]) }}" class="link-download">
                                     <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                                     Download File
                                 </a>
