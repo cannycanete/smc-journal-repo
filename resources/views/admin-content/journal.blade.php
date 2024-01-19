@@ -57,19 +57,30 @@
             </div>
             {{-- Journals container area --}}
             <div class="col-md-9">
+                {{-- Alert Message for uploading journal --}}
+                @if (session('success'))
+                    <div class="custom-alert m-bot" role="alert">
+                        <span>Success! Journal Updated</span>
+                    </div>
+                @endif
                 <div>
-                    <div class="relative">
+                    <div class="flex" style="gap: 1rem">
                         <h2><strong>{{ $journal->title }}</strong></h2>
+                        <a href="{{ route('admin-content.edit', ['id' => $journal->id]) }}" class="edit-btn right-pos-m" style="display: flex; gap: 0.5rem">
+                            <i class="bi bi-pen"></i>
+                            <span>Edit</span>
+                        </a>
+
                         <!-- Delete button -->
-                        <div class="right-pos-absolute">
+                        <div class="">
                             <form action="{{ route('admin-content.delete', ['id' => $journal->id]) }}"
                                 method="POST" class="pos-right-m">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="link-delete flex" title="Delete Journal"
+                                <button type="submit" class="link-delete flex" title="Delete Journal" style="display: flex; gap: 0.5rem"
                                     onclick="return confirm('Are you sure you want to delete this journal?')">
-                                    <span>Delete</span>
                                     <i class="bi bi-x-lg"></i>
+                                    <span>Delete</span>
                                 </button>
                             </form>
                         </div>
@@ -80,6 +91,7 @@
                         <strong>{{ $journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}</strong>
                     </p>
                     <p class="m-bot">{{ $journal->abstract }}</p>
+                    
                     {{-- Download file --}}
                     <div class="flex gap-1">
                         <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">

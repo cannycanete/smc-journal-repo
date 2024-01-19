@@ -42,6 +42,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('admin-content/profile/{user_id}', [AdminController::class, 'profile'])->name('admin-content.profile');
     Route::post('admin-content/search/', [AdminController::class, 'search'])->name('admin-content.search');
     Route::get('admin-content/journal/{id}', [AdminController::class, 'journal'])->name('admin-content.journal');
+    Route::get('admin-content/edit/{id}', [AdminController::class, 'edit'])->name('admin-content.edit');
+    Route::put('/admin-content/edit/{id}/update', [AdminController::class, 'update'])->name('admin-content.update');
     Route::delete('admin-content/journal/{id}', [AdminController::class, 'destroy'])->name('admin-content.delete');
 });
 
