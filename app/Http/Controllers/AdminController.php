@@ -50,6 +50,33 @@ class AdminController extends Controller
         return view('admin-content.journal', ['journal' => $journal]);
     }
 
+    public function edit($id)
+    {
+        $journal = Journal::findOrFail($id);
+        return view('admin-content.edit', ['journal' => $journal]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'datePublished' => 'required|date',
+            'abstract' => 'required|string',
+        ]);
+
+        // Find the journal by ID
+        $journal = Journal::findOrFail($id);
+
+        // Update the journal with the validated data
+        $journal->update($validatedData);
+
+        // Redirect to the journal details page
+        return redirect()->route('admin-content.journal', ['id' => $journal->id])->with('success', 'Journal updated successfully!');
+    }
+
     public function destroy($id)
     {
         $journal = Journal::find($id);

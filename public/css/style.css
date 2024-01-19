@@ -237,6 +237,15 @@ button {
     color: var(--negative-color);
 }
 
+.edit-btn:hover {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.edit-btn:hover i::before {
+    content: "\F4C7";
+}
+
 /* DIV */
 .wrapper {
     background-image: url('/img/bg.jpg');
