@@ -168,6 +168,17 @@ ul li {
     border-right: 1px solid var(--text-color);
 }
 
+.nav-approval {
+    background-color: #ccc;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+}
+
+.nav-approval.active {
+    background-color: var(--accent-color);
+    color: var(--front-color);
+}
+
 /* BTN */
 .login-btn {
     background-color: var(--accent-color);
@@ -237,13 +248,17 @@ button {
     color: var(--negative-color);
 }
 
-.edit-btn:hover {
+.approve-btn:hover, .edit-btn:hover {
     text-decoration: none;
     color: var(--accent-color);
 }
 
 .edit-btn:hover i::before {
     content: "\F4C7";
+}
+
+.approve-btn:hover i::before {
+    content: "\F26A";
 }
 
 /* DIV */

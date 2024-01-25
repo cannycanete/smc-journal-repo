@@ -32,7 +32,7 @@
                                     <i class="bi bi-search"></i>
                                 </button>
                             </div>
-        
+
                             <label for="">Search by Author Name</label>
                             <div class="search-input-group flex">
                                 <input type="text" name="searchByAuthor" placeholder="Author Name">
@@ -41,14 +41,14 @@
                             </div>
                         </form>
                     </li>
-    
+
                     <li style="margin-top: auto">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bi bi-door-closed-fill" style="margin-left: 0.5rem"></i>
                             {{ __('Logout') }}
                         </a>
-    
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
@@ -63,48 +63,101 @@
                         <span>Success! Journal Updated</span>
                     </div>
                 @endif
-                <div>
-                    <div class="flex" style="gap: 1rem">
-                        <h2><strong>{{ $journal->title }}</strong></h2>
-                        <a href="{{ route('admin-content.edit', ['id' => $journal->id]) }}" class="edit-btn right-pos-m" style="display: flex; gap: 0.5rem">
-                            <i class="bi bi-pen"></i>
-                            <span>Edit</span>
-                        </a>
 
-                        <!-- Delete button -->
-                        <div class="">
-                            <form action="{{ route('admin-content.delete', ['id' => $journal->id]) }}"
-                                method="POST" class="pos-right-m">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="link-delete flex" title="Delete Journal" style="display: flex; gap: 0.5rem"
-                                    onclick="return confirm('Are you sure you want to delete this journal?')">
-                                    <i class="bi bi-x-lg"></i>
-                                    <span>Delete</span>
-                                </button>
-                            </form>
+                {{-- APRPOVED JOURNALS --}}
+                @if ($journal->approval == 'approved')
+                    <div>
+                        <div class="flex" style="gap: 1rem">
+                            <h2><strong>{{ $journal->title }}</strong></h2>
+                            <a href="{{ route('admin-content.edit', ['id' => $journal->id]) }}" class="edit-btn right-pos-m"
+                                style="display: flex; gap: 0.5rem">
+                                <i class="bi bi-pen"></i>
+                                <span>Edit</span>
+                            </a>
+
+                            <!-- Delete button -->
+                            <div class="">
+                                <form action="{{ route('admin-content.delete', ['id' => $journal->id]) }}" method="POST"
+                                    class="pos-right-m">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="link-delete flex" title="Delete Journal"
+                                        style="display: flex; gap: 0.5rem"
+                                        onclick="return confirm('Are you sure you want to delete this journal?')">
+                                        <i class="bi bi-x-lg"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 1.25rem; color: var(--positive-color)">{{ $journal->author }}</p>
+                        <p class="m-bot">Published by:
+                            <strong>{{ $journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}</strong>
+                        </p>
+                        <p class="m-bot">{{ $journal->abstract }}</p>
+
+                        {{-- Download file --}}
+                        <div class="flex gap-1">
+                            <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
+                                class="link-download"
+                                style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
+                                <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
+                                Download File
+                            </a>
+                            <span
+                                style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }}
+                                Downloads</span>
+                            <span>{{ $journal->journalViewCounter }} Views</span>
+                            {{-- <span># Downloads</span>
+                        <span># Views</span> --}}
+                        </div>
+
+                    </div>
+
+                {{-- PENDING JOURNALS --}}
+                @elseif ($journal->approval == 'pending')
+                    <div>
+                        <div class="flex" style="gap: 1rem">
+                            <h2><strong>{{ $journal->title }}</strong></h2>
+                            <a href="{{ route('admin-content.approve', ['id' => $journal->id]) }}"
+                                class="approve-btn right-pos-m" style="display: flex; gap: 0.5rem">
+                                <i class="bi bi-check-circle"></i>
+                                <span>Approve</span>
+                            </a>
+
+                            <!-- Delete button -->
+                            <div class="">
+                                <form action="{{ route('admin-content.delete', ['id' => $journal->id]) }}" method="POST"
+                                    class="pos-right-m">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="link-delete flex" title="Delete Journal"
+                                        style="display: flex; gap: 0.5rem"
+                                        onclick="return confirm('Are you sure you want to delete this journal?')">
+                                        <i class="bi bi-x-lg"></i>
+                                        <span>Remove</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 1.25rem; color: var(--positive-color)">{{ $journal->author }}</p>
+                        <p class="m-bot">Published by:
+                            <strong>{{ $journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}</strong>
+                        </p>
+                        <p class="m-bot">{{ $journal->abstract }}</p>
+
+                        {{-- Download file --}}
+                        <div class="flex gap-1">
+                            <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
+                                class="link-download">
+                                <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
+                                Download File
+                            </a>
                         </div>
                     </div>
-
-                    <p style="font-size: 1.25rem; color: var(--positive-color)">{{ $journal->author }}</p>
-                    <p class="m-bot">Published by:
-                        <strong>{{ $journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}</strong>
-                    </p>
-                    <p class="m-bot">{{ $journal->abstract }}</p>
-                    
-                    {{-- Download file --}}
-                    <div class="flex gap-1">
-                        <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
-                            <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
-                            Download File
-                        </a>
-                        <span style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }} Downloads</span>
-                        <span>{{ $journal->journalViewCounter }} Views</span>
-                        {{-- <span># Downloads</span>
-                        <span># Views</span> --}}
-                    </div>
-                    
-                </div>
+                @endif
             </div>
         </div>
     </div>

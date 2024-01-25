@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/', [JournalController::class, 'index'])->name('user-content.index');
     Route::get('user-content/profile', [JournalController::class, 'profile'])->name('user-content.profile');
+    Route::get('user-content/pending', [JournalController::class, 'pending'])->name('user-content.pending');
     Route::get('user-content/create', [JournalController::class, 'create'])->name('user-content.create');
     Route::post('user-content/upload/', [JournalController::class, 'upload'])->name('user-content.upload');
     Route::post('user-content/search/', [JournalController::class, 'search'])->name('user-content.search');
@@ -39,6 +40,8 @@ Route::middleware('auth')->prefix('user')->group(function () {
 // Admin routes
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin-content.index');
+    Route::get('admin-content/pending', [AdminController::class, 'pending'])->name('admin-content.pending');
+    Route::get('admin-content/journal/{id}/approve', [AdminController::class, 'approve'])->name('admin-content.approve');
     Route::get('admin-content/profile/{user_id}', [AdminController::class, 'profile'])->name('admin-content.profile');
     Route::post('admin-content/search/', [AdminController::class, 'search'])->name('admin-content.search');
     Route::get('admin-content/journal/{id}', [AdminController::class, 'journal'])->name('admin-content.journal');

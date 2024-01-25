@@ -68,13 +68,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-input-group">
-                                <label for="">Journal Title</label>
+                                <label for="">Research Title</label>
                                 <input type="text" name="title" id="title" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-input-group">
-                                <label for="">Journal Author</label>
+                                <label for="">Author, Co-Author</label>
                                 <input type="text" name="author" id="author" required>
                             </div>
                         </div>

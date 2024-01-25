@@ -11,10 +11,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $journals = Journal::with('user')->get();
+        $journals = Journal::where('approval', 'approved' )->with('user')->get();
         $title = "";
         $author = "";
         return view('admin-content.index', [
+            'journals' => $journals,
+            'title' => $title,
+            'author' => $author
+        ]);
+    }
+
+    public function pending()
+    {
+        $journals = Journal::where('approval', 'pending' )->with('user')->get();
+        $title = "";
+        $author = "";
+        return view('admin-content.pending', [
             'journals' => $journals,
             'title' => $title,
             'author' => $author
@@ -77,15 +89,26 @@ class AdminController extends Controller
         return redirect()->route('admin-content.journal', ['id' => $journal->id])->with('success', 'Journal updated successfully!');
     }
 
+    public function approve($id)
+    {
+        // Find the journal by ID
+        $journal = Journal::findOrFail($id);
+        $journal->update(['approval' => 'approved']);
+
+        // Redirect to the journal details page
+        return redirect()->route('admin-content.index', ['id' => $journal->id])->with('approved', 'Journal Approved!');
+    }
+
     public function destroy($id)
     {
-        $journal = Journal::find($id);
-        if (!$journal) {
-            return redirect()->back()->with('error', 'Journal not found');
+        try {
+            $journal = Journal::findOrFail($id);
+            $journal->delete();
+            
+            return redirect()->route('admin-content.index')->with('success-delete', 'Journal deleted successfully');
+        } catch (\Exception $e) {
+            // Handle the exception or simply redirect back with an error message
+            return redirect()->back()->with('error', 'Journal not found or unable to delete');
         }
-
-        $journal->delete();
-
-        return redirect()->back()->with('success-delete', 'Journal deleted successfully');
     }
 }
