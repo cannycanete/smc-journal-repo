@@ -79,20 +79,9 @@
             {{-- Journals container area --}}
             <div class="col-md-9">
                 <div class="flex m-bot" style="gap: 0.5rem">
-                    <a href="{{ route('admin-content.index') }}" class="nav-approval active">Approved</a>
-                    <a href="{{ route('admin-content.pending') }}" class="nav-approval">Pending</a>
+                    <a href="{{ route('admin-content.index') }}" class="nav-approval">Approved</a>
+                    <a href="{{ route('admin-content.pending') }}" class="nav-approval active">Pending</a>
                 </div>
-
-                {{-- Alert Message for approving journal --}}
-                @if (session('approved'))
-                    <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Journal Approved</span>
-                    </div>
-                @elseif (session('success-delete'))
-                    <div class="custom-alert delete m-bot" role="alert">
-                        <span>Success! Journal Removed</span>
-                    </div>
-                @endif
 
                 <div class="journal-card-container">
                     @if ($journals->isEmpty())
@@ -113,15 +102,11 @@
                                 <div class="flex gap-1">
                                     {{-- Download file --}}
                                     <a href="{{ asset($journal->filePath) }}" download="{{ $journal->fileName }}"
-                                        class="link-download" style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">
+                                        class="link-download">
                                         <i class="bi bi-cloud-arrow-down-fill" style="margin-right: 0.5rem"></i>
                                         Download File
                                     </a>
-
-                                    <span style="border-right: 1px solid #0D0C0B; padding-right: 0.5rem; margin-right: 0.5rem">{{ $journal->journalDownloadCounter }} Downloads</span>
-                                    <span>{{ $journal->journalViewCounter }} Views</span>
                                 </div>
-                                
                             </div>
                         @endforeach
                     @endif

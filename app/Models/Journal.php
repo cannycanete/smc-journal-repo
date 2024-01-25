@@ -20,6 +20,7 @@ class Journal extends Model
         'fileName',
         'journalDownloadCounter',
         'journalViewCounter',
+        'approval',
     ];
 
     // Define the relationship with the User model

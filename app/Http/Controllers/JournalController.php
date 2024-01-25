@@ -11,7 +11,7 @@ class JournalController extends Controller
 {
     public function index()
     {
-        $journals = Journal::all();
+        $journals = Journal::where('approval', 'approved')->get();
         $title = "";
         $author = "";
         return view('user-content.index', [
@@ -23,8 +23,14 @@ class JournalController extends Controller
 
     public function profile()
     {
-        $journals = Journal::where('user_id', auth()->user()->id)->get();
+        $journals = Journal::where('user_id', auth()->user()->id)->where('approval', 'approved')->get();
         return view('user-content.profile', ['journals' => $journals]);
+    }
+
+    public function pending()
+    {
+        $journals = Journal::where('user_id', auth()->user()->id)->where('approval', 'pending')->get();
+        return view('user-content.pending', ['journals' => $journals]);
     }
 
     public function create()
@@ -55,11 +61,12 @@ class JournalController extends Controller
             $journal->fileName = $fileName;
             $journal->journalDownloadCounter = 0;
             $journal->journalViewCounter = 0;
+            $journal->approval = "pending";
 
             $journal->save();
             // dd($request->user_id);
 
-            return redirect(route('user-content.profile'))->with('success', 'Journal uploaded successfully!');
+            return redirect(route('user-content.pending'))->with('success', 'Journal uploaded successfully!');
         } catch (\Throwable $th) {
             dd($th->getMessage());
             return redirect()->back()->with('error', 'An error has occured.');

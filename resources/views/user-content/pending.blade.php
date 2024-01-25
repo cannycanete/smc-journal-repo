@@ -53,7 +53,7 @@
                 {{-- Alert Message for uploading journal --}}
                 @if (session('success'))
                     <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Journal Uploaded</span>
+                        <span>Journal waiting for approval</span>
                     </div>
                 @elseif (session('success-delete'))
                     <div class="custom-alert delete m-bot" role="alert">
@@ -71,8 +71,8 @@
                 @endif
 
                 <div class="flex m-bot" style="gap: 0.5rem">
-                    <a href="{{ route('user-content.profile') }}" class="nav-approval active">Approved</a>
-                    <a href="{{ route('user-content.pending') }}" class="nav-approval">Pending</a>
+                    <a href="{{ route('user-content.profile') }}" class="nav-approval">Approved</a>
+                    <a href="{{ route('user-content.pending') }}" class="nav-approval active">Pending</a>
                 </div>
 
                 <div class="journal-card-container">
