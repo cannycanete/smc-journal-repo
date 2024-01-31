@@ -80,7 +80,7 @@
             <div class="col-md-9">
                 <div class="flex m-bot" style="gap: 0.5rem">
                     <a href="{{ route('admin-content.index') }}" class="nav-approval active">Approved</a>
-                    <a href="{{ route('admin-content.pending') }}" class="nav-approval">Pending</a>
+                    <a href="{{ route('admin-content.pending') }}" class="nav-approval" disabled>Pending</a>
                 </div>
 
                 {{-- Alert Message for approving journal --}}

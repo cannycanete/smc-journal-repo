@@ -105,12 +105,24 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="journalFile" class="form-label">Journal File</label>
                             <input class="form-control" type="file" name="journalFile" id="journalFile"
                                 style="box-shadow: none" required>
                         </div>
-                        <div class="col-md-6 flex flex-gap-1">
+                        <div class="row col-md-8">
+                            <div class="col-md-6">
+                                <label for="authorImage" class="form-label">Author Image</label>
+                                <input class="form-control" type="file" name="authorImage" id="authorImage"
+                                    style="box-shadow: none" required accept="image/*">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="coAuthorImage" class="form-label">Co-Author Image</label>
+                                <input class="form-control" type="file" name="coAuthorImage" id="coAuthorImage"
+                                    style="box-shadow: none" required accept="image/*">
+                            </div>
+                        </div>
+                        <div class="col-md-12 flex flex-gap-1">
                             <div class="right-pos-m">
                                 <label for=""></label>
                                 <button type="submit" class="link-btn" name="submit">

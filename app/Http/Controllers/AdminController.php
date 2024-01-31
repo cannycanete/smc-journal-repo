@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function profile($user_id)
     {
-        $journals = Journal::where('user_id', $user_id)->get();
+        $journals = Journal::where('approval', 'approved' )->where('user_id', $user_id)->get();
         $user = User::where('id', $user_id)->first();
         return view('admin-content.profile', ['journals' => $journals, 'user' => $user]);
     }
