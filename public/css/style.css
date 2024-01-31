@@ -1,8 +1,7 @@
 :root {
     --text-color: #0D0C0B;
 
-    --primary-color: #49A3F2;
-    --accent-color: #FFB254;
+    --accent-color: #4099ff;
     --front-color: #FEFEFF;
     --back-color: #FBFAFB;
 
@@ -98,6 +97,22 @@ p {
     margin-top: 0.5rem;
 }
 
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--back-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+}
+
 /* MARGINS & POSITIONING*/
 /* "m" means margin */
 .m-top {
@@ -153,10 +168,21 @@ ul li {
     border-right: 1px solid var(--text-color);
 }
 
+.nav-approval {
+    background-color: #ccc;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+}
+
+.nav-approval.active {
+    background-color: var(--accent-color);
+    color: var(--front-color);
+}
+
 /* BTN */
 .login-btn {
     background-color: var(--accent-color);
-    color: var(--text-color);
+    color: var(--front-color);
     text-transform: uppercase;
     font-weight: 600;
     display: block;
@@ -170,7 +196,7 @@ ul li {
 .link-btn,
 .link-cancel {
     background-color: var(--accent-color);
-    color: var(--text-color);
+    color: var(--front-color);
     display: block;
     width: fit-content;
     padding: 0.25rem 1rem;
@@ -178,12 +204,18 @@ ul li {
 }
 
 .link-btn:hover {
+    color: var(--front-color);
     text-decoration: underline;
 }
 
 .link-cancel {
     background-color: #ccc;
+    color: var(--text-color);
     font-weight: normal;
+}
+
+.link-cancel:hover {
+    color: var(--text-color);
 }
 
 .link-download,
@@ -200,20 +232,59 @@ button {
     color: var(--accent-color);
 }
 
-.link-delete i{
+.link-delete i {
     display: block;
     font-size: 1rem;
     transition: transform 0.5s;
 }
 
-.link-delete i:hover {
+.link-delete:hover i {
     color: var(--negative-color);
     transform: rotate(90deg);
-} 
+}
+
+.link-delete:hover span {
+    color: var(--negative-color);
+}
+
+.approve-btn {
+    background-color: var(--accent-color);
+    color: var(--front-color);
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.approve-btn:hover {
+    text-decoration: none;
+    color: var(--front-color);
+}
+
+.approve-btn.disabled {
+    color: var(--front-color);
+    background-color: #ccc;
+    cursor: default;
+}
+
+.edit-btn:hover {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.edit-btn:hover i::before {
+    content: "\F4C7";
+}
+
+.approve-btn.disabled:hover i::before {
+    content: "\F26B";
+}
+
+.approve-btn:hover i::before {
+    content: "\F26A";
+}
 
 /* DIV */
 .wrapper {
-    background-image: url('/img/bg-prelogin.jpg');
+    background-image: url('/img/bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -274,6 +345,17 @@ button {
 .login-img {
     width: 100%;
     height: 100%;
+}
+
+.img-nav-logo {
+    width: 128px;
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+    border-right: 1px solid var(--text-color);
+}
+
+.img-container {
+    width: 200px;
 }
 
 /* DIVIDERS $ DISPLAY */
@@ -376,5 +458,31 @@ textarea:hover,
 .search-input-group:has(input:hover),
 input[type=file]:active,
 input[type=file]:focus {
+    border: 2px solid var(--accent-color);
+}
+
+.checkbox-container {
+    border: 2px solid #ccc;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    border-radius: 0.25rem;
+    transition: 300ms;
+}
+
+.checkbox-container label {
+    margin: 0;
+    padding: 0.25rem 1rem;
+}
+
+.checkbox-container:hover,
+.checkbox-container label:hover,
+.checkbox-container input[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+.checkbox-container:has(input[type=checkbox]:checked),
+.checkbox-container:hover {
     border: 2px solid var(--accent-color);
 }
