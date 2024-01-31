@@ -41,35 +41,50 @@ class JournalController extends Controller
     public function upload(Request $request)
     {
         try {
-            // get file
+            // Get files
             $journalFile = $request->file('journalFile');
+            $authorImage = $request->file('authorImage');
+            $coAuthorImage = $request->file('coAuthorImage');
 
+            // Create new Journal instance
             $journal = new Journal();
 
+            // Set attributes for document/journal
             $journal->user_id = $request->user()->id;
             $journal->title = $request->input('title');
             $journal->author = $request->input('author');
             $journal->publisher = $request->input('publisher');
             $journal->datePublished = $request->input('datePublished');
             $journal->abstract = $request->input('abstract');
+            $journal->journalDownloadCounter = 0;
+            $journal->journalViewCounter = 0;
+            $journal->approval = "pending";
 
-            //move file to public/uploads folder & save file path to journals table & 
+            // Move document/journal file to public/uploads folder
             $destinationPath = "uploads";
             $fileName = time() . '_' . $journalFile->getClientOriginalName();
             $journalFile->move($destinationPath, $fileName);
             $journal->filePath = $destinationPath . '/' . $fileName;
             $journal->fileName = $fileName;
-            $journal->journalDownloadCounter = 0;
-            $journal->journalViewCounter = 0;
-            $journal->approval = "pending";
 
+            // Move author image to public/img folder
+            $imgDestinationPath = "uploads-author-img";
+            $authorImageName = time() . '_author_' . $authorImage->getClientOriginalName();
+            $authorImage->move($imgDestinationPath, $authorImageName);
+            $journal->authorImage = $imgDestinationPath . '/' . $authorImageName;
+
+            // Move co-author image to public/img folder
+            $coAuthorImageName = time() . '_coauthor_' . $coAuthorImage->getClientOriginalName();
+            $coAuthorImage->move($imgDestinationPath, $coAuthorImageName);
+            $journal->coAuthorImage = $imgDestinationPath . '/' . $coAuthorImageName;
+
+            // Save the journal entry
             $journal->save();
-            // dd($request->user_id);
 
             return redirect(route('user-content.pending'))->with('success', 'Journal uploaded successfully!');
         } catch (\Throwable $th) {
             dd($th->getMessage());
-            return redirect()->back()->with('error', 'An error has occured.');
+            return redirect()->back()->with('error', 'An error has occurred.');
         }
     }
 
@@ -92,7 +107,7 @@ class JournalController extends Controller
     public function journal($id)
     {
         $journal = Journal::findOrFail($id);
-        
+
         // Increment view counter
         $journal->journalViewCounter += 1;
         $journal->save();

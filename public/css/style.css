@@ -234,7 +234,6 @@ button {
 
 .link-delete i {
     display: block;
-    margin-left: 0.5rem;
     font-size: 1rem;
     transition: transform 0.5s;
 }
@@ -248,13 +247,35 @@ button {
     color: var(--negative-color);
 }
 
-.approve-btn:hover, .edit-btn:hover {
+.approve-btn {
+    background-color: var(--accent-color);
+    color: var(--front-color);
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.approve-btn:hover {
+    text-decoration: none;
+    color: var(--front-color);
+}
+
+.approve-btn.disabled {
+    color: var(--front-color);
+    background-color: #ccc;
+    cursor: default;
+}
+
+.edit-btn:hover {
     text-decoration: none;
     color: var(--accent-color);
 }
 
 .edit-btn:hover i::before {
     content: "\F4C7";
+}
+
+.approve-btn.disabled:hover i::before {
+    content: "\F26B";
 }
 
 .approve-btn:hover i::before {
@@ -331,6 +352,10 @@ button {
     margin-right: 0.5rem;
     padding-right: 0.5rem;
     border-right: 1px solid var(--text-color);
+}
+
+.img-container {
+    width: 200px;
 }
 
 /* DIVIDERS $ DISPLAY */
@@ -433,5 +458,31 @@ textarea:hover,
 .search-input-group:has(input:hover),
 input[type=file]:active,
 input[type=file]:focus {
+    border: 2px solid var(--accent-color);
+}
+
+.checkbox-container {
+    border: 2px solid #ccc;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    border-radius: 0.25rem;
+    transition: 300ms;
+}
+
+.checkbox-container label {
+    margin: 0;
+    padding: 0.25rem 1rem;
+}
+
+.checkbox-container:hover,
+.checkbox-container label:hover,
+.checkbox-container input[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+.checkbox-container:has(input[type=checkbox]:checked),
+.checkbox-container:hover {
     border: 2px solid var(--accent-color);
 }
