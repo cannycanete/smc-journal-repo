@@ -7,7 +7,7 @@
                 <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
                     {{-- <p class="nav-main-text">SMC</p> --}}
                     <img src="img/mysmc.png" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository</p>
+                    <p class="nav-sub-text">Research Office Online Repository</p>
                 </a>
             </div>
 
@@ -21,7 +21,7 @@
                             @elseif ($author !== '' && $title === null)
                                 <p>Showing results for <strong>{{ $author }}</strong></p>
                             @elseif ($title === '' && $author === null)
-                                <p>No journals found for <strong>{{ $title }}</strong> by
+                                <p>No article found for <strong>{{ $title }}</strong> by
                                     <strong>{{ $author }}</strong>
                                 </p>
                             @elseif ($title !== '' && $author !== '')
@@ -45,9 +45,9 @@
             <div class="col-md-3">
                 <form action="{{ route('user-content.search') }}" method="POST">
                     @csrf
-                    <label for="">Search by Journal Title</label>
+                    <label for="">Search by Article Title</label>
                     <div class="search-input-group flex m-bot">
-                        <input type="text" name="searchByTitle" placeholder="Journal Title" value="{{ $title }}">
+                        <input type="text" name="searchByTitle" placeholder="Article Title" value="{{ $title }}">
                         <button type="submit" name="submit" class="searchBtn" title="Search">
                             <i class="bi bi-search"></i>
                         </button>
@@ -65,7 +65,7 @@
             <div class="col-md-9">
                 <div class="journal-card-container">
                     @if ($journals->isEmpty())
-                        <p>No journals yet</p>
+                        <p>No Articles yet</p>
                     @else
                         @foreach ($journals as $journal)
                             <div class="journal-card">

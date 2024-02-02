@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository</p>
+                    <p class="nav-sub-text">Research Office Online Repository</p>
                 </a>
             </div>
 
@@ -15,7 +15,7 @@
                     <a href="{{ route('user-content.profile') }}" style="font-weight: nomal">
                         <i class="bi bi-caret-left-fill" style="margin-right: 0.25rem"></i>{{ Auth::user()->name }}
                     </a>
-                    / Upload Journal
+                    / Upload Article
                 </p>
             </div>
         </div>
@@ -84,7 +84,7 @@
                         <div class="col-md-6">
                             <div class="form-input-group">
                                 <label for="">Publisher</label>
-                                <input type="text" name="publisher" id="publisher" required>
+                                <input type="text" name="publisher" id="publisher" value="Research Office" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -106,7 +106,7 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="journalFile" class="form-label">Journal File</label>
+                            <label for="journalFile" class="form-label">Article File</label>
                             <input class="form-control" type="file" name="journalFile" id="journalFile"
                                 style="box-shadow: none" required>
                         </div>
@@ -127,7 +127,7 @@
                                 <label for=""></label>
                                 <button type="submit" class="link-btn" name="submit">
                                     <i class="bi bi-cloud-arrow-up-fill" style="margin-right: 0.5rem"></i>
-                                    Upload Journal
+                                    Upload Article
                                 </button>
                             </div>
                             <div>

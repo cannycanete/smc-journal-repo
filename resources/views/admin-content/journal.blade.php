@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <a href="{{ route('admin-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository <span class="text-bold">Admin</span></p>
+                    <p class="nav-sub-text">Research Office Online Repository <span class="text-bold">Admin</span></p>
                 </a>
             </div>
 
@@ -25,7 +25,7 @@
                     <li>
                         <form action="{{ route('admin-content.search') }}" method="POST">
                             @csrf
-                            <label for="">Search by Journal Title</label>
+                            <label for="">Search by Article Title</label>
                             <div class="search-input-group flex m-bot">
                                 <input type="text" name="searchByTitle" placeholder="Journal Title">
                                 <button type="submit" name="submit" class="searchBtn" title="Search">
@@ -60,7 +60,7 @@
                 {{-- Alert Message for uploading journal --}}
                 @if (session('success'))
                     <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Journal Updated</span>
+                        <span>Success! Article Updated</span>
                     </div>
                 @endif
 

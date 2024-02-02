@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <a href="{{ route('admin-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository <span class="text-bold">Admin</span></p>
+                    <p class="nav-sub-text">Research Office Online Repository <span class="text-bold">Admin</span></p>
                 </a>
             </div>
 
@@ -20,7 +20,7 @@
                             @elseif ($author !== '' && $title === null)
                                 <p>Showing results for <strong>{{ $author }}</strong></p>
                             @elseif ($title === '' && $author === null)
-                                <p>No journals found for <strong>{{ $title }}</strong> by
+                                <p>No articles found for <strong>{{ $title }}</strong> by
                                     <strong>{{ $author }}</strong>
                                 </p>
                             @elseif ($title !== '' && $author !== '')
@@ -46,7 +46,7 @@
                     <li>
                         <form action="{{ route('admin-content.search') }}" method="POST">
                             @csrf
-                            <label for="">Search by Journal Title</label>
+                            <label for="">Search by Article Title</label>
                             <div class="search-input-group flex m-bot">
                                 <input type="text" name="searchByTitle" placeholder="Journal Title" value="{{ $title }}">
                                 <button type="submit" name="submit" class="searchBtn" title="Search">
@@ -86,17 +86,17 @@
                 {{-- Alert Message for approving journal --}}
                 @if (session('approved'))
                     <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Journal Approved</span>
+                        <span>Success! Article Approved</span>
                     </div>
                 @elseif (session('success-delete'))
                     <div class="custom-alert delete m-bot" role="alert">
-                        <span>Success! Journal Removed</span>
+                        <span>Success! Article Removed</span>
                     </div>
                 @endif
 
                 <div class="journal-card-container">
                     @if ($journals->isEmpty())
-                        <p>No journals yet</p>
+                        <p>No articles yet</p>
                     @else
                         @foreach ($journals as $journal)
                             <div class="journal-card">
