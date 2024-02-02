@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <a href="{{ route('admin-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository <span class="text-bold">Admin</span></p>
+                    <p class="nav-sub-text">Research Office Online Repository <span class="text-bold">Admin</span></p>
                 </a>
             </div>
 
@@ -62,13 +62,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-input-group">
-                                <label for="">Journal Title</label>
+                                <label for="">Article Title</label>
                                 <input type="text" name="title" id="title" required value="{{ $journal->title }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-input-group">
-                                <label for="">Journal Author</label>
+                                <label for="">Article Author</label>
                                 <input type="text" name="author" id="author" required value="{{ $journal->author }}">
                             </div>
                         </div>

@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <a href="{{ route('user-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository</p>
+                    <p class="nav-sub-text">Research Office Online Repository</p>
                 </a>
             </div>
 
@@ -25,7 +25,7 @@
             <div class="col-md-3">
                 <form action="{{ route('user-content.search') }}" method="POST">
                     @csrf
-                    <label for="">Search by Journal Title</label>
+                    <label for="">Search by Article Title</label>
                     <div class="search-input-group flex m-bot">
                         <input type="text" name="searchByTitle" placeholder="Journal Title">
                         <button type="submit" name="submit" class="searchBtn" title="Search">
@@ -47,6 +47,17 @@
                     <h2><strong>{{ $journal->title }}</strong></h2>
                     <p style="font-size: 1.25rem; color: var(--positive-color)">{{ $journal->author }}</p>
                     <p  class="m-bot">Published by: <strong>{{$journal->publisher . ' - ' . \Carbon\Carbon::parse($journal->datePublished)->format('F d, Y') }}</strong></p>
+                    
+                    {{-- Author img container --}}
+                    <div class="flex m-bot" style="gap: 0.5rem">
+                        <div class="img-container">
+                            <img src="/{{ $journal->authorImage }}" alt="" style="width: 100%">
+                        </div>
+                        <div class="img-container">
+                            <img src="/{{ $journal->coAuthorImage }}" alt="" style="width: 100%">
+                        </div>
+                    </div>
+
                     <p class="m-bot">{{ $journal->abstract }}</p>
                     {{-- Download file --}}
                     <a href="{{ route('download-journal', ['id' => $journal->id]), asset($journal->filePath) }}" download="{{ $journal->fileName }}" class="link-download">

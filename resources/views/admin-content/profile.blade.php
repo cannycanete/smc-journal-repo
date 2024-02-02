@@ -7,7 +7,7 @@
             <div class="col-md-3">
                 <a href="{{ route('admin-content.index') }}" class="nav-title-container flex">
                     <img src="{{ asset('img/mysmc.png') }}" alt="mysmclogo" class="img-nav-logo">
-                    <p class="nav-sub-text">Research Journal Online Repository <span class="text-bold">Admin</span></p>
+                    <p class="nav-sub-text">Research Office Online Repository <span class="text-bold">Admin</span></p>
                 </a>
             </div>
         </div>
@@ -41,11 +41,11 @@
                 {{-- Alert Message for uploading journal --}}
                 @if (session('success'))
                     <div class="custom-alert m-bot" role="alert">
-                        <span>Success! Journal Uploaded</span>
+                        <span>Success! Article Uploaded</span>
                     </div>
                 @elseif (session('success-delete'))
                     <div class="custom-alert delete m-bot" role="alert">
-                        <span>Success! Journal Deleted</span>
+                        <span>Success! Article Deleted</span>
                     </div>
                 @endif
 
@@ -62,7 +62,7 @@
                     {{-- All journals loop here --}}
                     <div class="journal-card-container">
                         @if ($journals->isEmpty())
-                            <p>You have no journals yet.</p>
+                            <p>You have no articles yet.</p>
                         @else
                             @foreach ($journals as $journal)
                                 <div class="journal-card">
